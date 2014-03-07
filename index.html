@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)http://getbootstrap.com/examples/navbar/ -->
+<html lang="en"><script id="tinyhippos-injected">if (window.top.ripple) { window.top.ripple("bootstrap").inject(window, document); }</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Console</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/navbar.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+  <style type="text/css"></style><style>[touch-action="none"]{ -ms-touch-action: none; touch-action: none; }[touch-action="pan-x"]{ -ms-touch-action: pan-x; touch-action: pan-x; }[touch-action="pan-y"]{ -ms-touch-action: pan-y; touch-action: pan-y; }[touch-action="scroll"],[touch-action="pan-x pan-y"],[touch-action="pan-y pan-x"]{ -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; }</style></head>
+<style type="text/css">
+.line
+{
+  word-break:break-all;
+  width: 100%
+}
+
+/*.highlight {
+display: none;
+padding: 9px 14px;
+margin-bottom: 14px;
+background-color: #f7f7f9;
+border: 1px solid #e1e1e8;
+border-radius: 4px;
+}*/
+</style>
+  <body style="">
+
+    <div class="container">
+
+      <!-- Static navbar -->
+      <div class="navbar navbar-default">
+        <div class="navbar-header" style="width: 100%;">
+          <span class="pull-right" style="padding-top:15px; padding-right:30px;"><span id="channelName"></span>  | Msg: <span id="totalMsg"></span> | Hightlight: <span id="hc"></span>  | Chars: <span id="TotalByte"></span> | Last: <span id="LastTime"></span>  | <span id="status">Not Connected</span></span>
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <span class="navbar-brand" >Console</span>
+      <ul class="nav navbar-nav">
+            <li id="showHelp"><a href="#" onclick="$('#hideHelp').fadeIn('slow'); $('#help').fadeIn('slow');$('#showHelp').hide();">Help</a></li>
+            <li id="hideHelp" style="display:none"><a href="#" onclick="$('#hideHelp').hide(); $('#help').fadeOut('slow');$('#showHelp').fadeIn('slow');" >Help</a></li>
+
+            <li id="showSettings"><a href="#" onclick="$('#settings').fadeIn('slow');$('#showSettings').hide();">Settings</a></li>
+
+            <li id="showH"><a href="#" onclick="$('#consoleH').fadeIn('fast');$('#console').hide();$('#showH').hide();$('#hideH').show();">Highlighted</a></li>
+             <li id="hideH" style="display:none" ><a href="#"  onclick="$('#console').fadeIn('fast');$('#consoleH').hide();$('#showH').show();$('#hideH').hide();">All Feed</a></li>
+                 
+                  <li id="btnpublish" s ><a href="#"  onclick="$('#publish').fadeIn('fast');$('#btnpublish').hide();">Publish</a></li>
+          </ul>
+
+
+        </div>
+       
+      </div>
+
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="highlight well well-sm" id="help" style="display:none">
+        <b>URL Optionl Parameters</b><br>
+        /?channel=U_Janis&highlight=MD&highlight2=webId&max=5&sub=SUBKEY&pub=PUBKEY<br><br>
+
+        <b>channel</b><br>
+        Channel Name<br><br>  
+        <b>hightlight</b><br>
+        hightlight [red] word in comma seperated eg: WORD1,WORD2<br><br>
+        <b>hightlight2</b><br>
+        hightlight [green] word in comma seperated eg: WORD1,WORD2<br><br>
+        <b>max</b><br>
+        max msg show in the console<br><br>
+        <b>sub</b><br>
+        Subscription Key<br><br>
+        <b>pub</b><br>
+        Publication Key<br><br>
+       <!--  <br><b>onlyHighlight</b><br>
+        If true, show only highlighted messages<br><br>
+        <br> -->
+      </div>
+      <div class="well well-sm" id="settings" style="display:none">
+        <b>Settings</b><br>
+        <span id="settingMsg"></span><br>
+        <div class="input-group">
+          <span class="input-group-addon">Channel</span>
+          <input type="text" class="form-control" placeholder="channel" id='txtchannel'>
+        </div><br>
+        <div class="input-group">
+          <span class="input-group-addon">Highlight [red]</span>
+          <input type="text" class="form-control" placeholder="Highlight" id='txth1'>
+        </div><br>
+        <div class="input-group">
+          <span class="input-group-addon">Highlight [green]</span>
+          <input type="text" class="form-control" placeholder="Highlight 2" id='txth2'>
+        </div><br>
+        <div class="input-group">
+          <span class="input-group-addon">Max Buffer</span>
+          <input type="number" class="form-control" placeholder="Buffer" id='txtmax'>
+        </div><br>
+       <div class="input-group">
+          <span class="input-group-addon">Subscription Key</span>
+          <input type="text" class="form-control" placeholder="Subscription Key" id='txtsub'>
+        </div><br>
+         <div class="input-group">
+          <span class="input-group-addon">Publication Key</span>
+          <input type="text" class="form-control" placeholder="Publication Key" id='txtpub'>
+        </div><br>
+        <button class="btn " onclick="saveFromForm()">Save</button>
+        <button class="btn " onclick="cancelForm()">cancel</button>
+      <br>
+      </div>
+      <div class="well well-sm" id="publish" style="display:none">
+        <b>Publish</b><br>
+        <span id="pubStatus"></span><br>
+        <div class="input-group">
+          <span class="input-group-addon">Content</span>
+          <input type="text" class="form-control" placeholder="content" id='txtcontent'>
+          
+        </div><br>
+
+        <button class="btn " onclick="publish();">Publish</button>
+          <button class="btn " onclick=" clearPub();;$('#publish').hide();$('#btnpublish').show();">Close</button>
+        <br>  
+      </div>
+
+      <div class="highlight well well-sm" id="console" stype="word-break:break-all;">
+
+      </div>
+      <div class="highlight well well-sm" id="consoleH" stype="word-break:break-all;" style="display:none">
+
+      </div>
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+       
+    <script>
+    // function hmac_SHA256(msg,sec)
+    // {
+    //  return CryptoJS.HmacSHA256(msg,sec).toString();
+    // }
+    </script>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+     <script src="js/pubnub-crypto.min.js"></script>
+    <script src="js/pubnub.js"></script>
+
+    <script src="js/main.js"></script>
+
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27467549-2', 'crescle.com');
+  ga('send', 'pageview');
+
+</script>
+<div id="GOOGLE_INPUT_CHEXT_FLAG" style="display: none;" input="en-t-k0-und" input_stat="{&quot;mk&quot;:true}"></div><iframe frameborder="0" scrolling="no" style="background-color: transparent; border: 0px; display: none; box-sizing: content-box; width: 427px; height: 299px; box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 16px 0px; z-index: 2147483640; margin: 0px; position: fixed;"></iframe><iframe frameborder="0" scrolling="no" style="background-color: transparent; border: 0px; box-sizing: content-box; width: 517px; height: 211px; box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 16px 0px; z-index: 2147483644; margin: 0px; position: fixed; top: 632px; left: 1042px; display: none;"></iframe></body></html>

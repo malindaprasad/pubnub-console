@@ -1,0 +1,17 @@
+<html>
+    <script src="https://cdn.pubnub.com/pubnub.min.js"></script>
+    <script src="https://cdn.pubnub.com/pubnub-crypto.min.js"></script>
+</html>
+<script>
+ var pubnub = PUBNUB.init({
+     //Should only be run on auth server
+     subscribe_key : 'sub-c-7db2c778-38bd-11e3-afee-02ee2ddab7fe',
+     publish_key   : 'pub-c-e270cfc4-fc95-43ef-aa11-63eb778ceac3',
+     secret_key    : 'sec-c-MzJhNDhhZTgtNWVkYi00ZWNiLThkM2ItYjE1YTNkYTRhYWRk'
+ });
+
+  pubnub.audit ({
+		callback: function(D){console.log(D);},
+   		  channel: 'my_channel'
+ });
+</script>
